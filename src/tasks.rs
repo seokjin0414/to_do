@@ -2,7 +2,9 @@ use std::fs::OpenOptions;
 use chrono::{serde::ts_seconds, DateTime, Utc, Local};
 use serde::{Deserialize, Serialize};
 use std::io::{Result, Seek, SeekFrom};
+use std::iter::Successors;
 use std::path::PathBuf;
+use std::ptr::read;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Task {
@@ -39,3 +41,14 @@ pub fn add_task(journal_path: PathBuf, task: Task) -> Result<()> {
 
     Ok(())
 }
+
+// fn function_1() -> Result(Success, Failure) {
+//     match operation_that_might_fail() {
+//         Ok(success) => success,
+//         Err(failure) => return Err(failure),
+//     }
+// }
+//  동일하다
+// fn function_2() -> Result(Success, Failure) {
+//     operation_that_might_fail()?
+// }
